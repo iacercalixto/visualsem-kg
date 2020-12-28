@@ -12,8 +12,8 @@ Representation learning for VisualSem knowledge graph.
 2. Data
 - Graph:
   - Dataframe storing graph nodes, its neighbors, and their relation types: ```join_df.pkl``` (download [here](https://drive.google.com/file/d/1GYErLbLWJ3x-xtsCY3Kgb5PCSiBvVWbY/view?usp=sharing))
-  - Reference dict (node, edge numbering): ```ref_dict.pkl```
-  - Edge ID mapping for data split: ```rel_map.csv```
+  - Reference dict (node, edge numbering): ```ref_dict.pkl``` (download [here](https://drive.google.com/file/d/13afpqNpOdRMRL5WLfkFW4I0Xw5G4HmAt/view?usp=sharing))
+  - Edge ID mapping for data split: ```rel_map.csv``` (download [here](https://drive.google.com/file/d/1xxaMs-tCFIx1nuG0wIPi_YOtQi7bGUDv/view?usp=sharing))
 - Features:
   - Image features: ```visualsem_features.h5``` (download [here](https://drive.google.com/file/d/1J6qx4-ho24DxGueXONH9ap0s26oijJSy/view?usp=sharing))
   - Text features: ```text_features_multi.h5``` (download [here](https://drive.google.com/file/d/1rtvYaVR0RAG218o3wLWpJWeI2ao0s4Mn/view?usp=sharing))
