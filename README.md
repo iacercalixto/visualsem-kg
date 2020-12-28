@@ -20,15 +20,18 @@ Representation learning for VisualSem knowledge graph.
 
 3. GraphSage+DistMult: 
 - Training:
-  - Best model using image+text features and node+edge gating: ```python train.py```  
-  - Model without image or text features: ```python train.py --mode node```
-  - Model using only image features and node+edge gating: ```python train.py --mode img```
-  - Model using only text features and node+edge gating: ```python train.py --mode gl```
+  - To train our best model using image+text features and node+edge gating: ```python train.py```  
+  - To train model without image or text features: ```python train.py --mode node```
+  - To train model using only image features and node+edge gating: ```python train.py --mode img```
+  - To train model using only text features and node+edge gating: ```python train.py --mode gl```
+  - To modify the number of negative samples (default: 1000): ```python train.py --neg_sample_size 100 --batch_size 10000```
 - Evaluation:
-  - Best model using image+text features and node+edge gating: ```python eval.py```  
-  - Model without image or text features: ```python eval.py --mode node```
-  - Model using only image features and node+edge gating: ```python eval.py --mode img```
-  - Model using only text features and node+edge gating: ```python eval.py --mode gl```
+  - To download pretrain model weights [here](https://drive.google.com/drive/folders/1FAOEBU67rqhzfGr4GmE2w9vmnbwSr3le?usp=sharing) and unzip it. Place it at the same folder as ```eval.py```
+  - To evaluate our best model using image+text features and node+edge gating: ```python eval.py```  
+  - To evaluate model without image or text features: ```python eval.py --mode node```
+  - To evaluate model using only image features and node+edge gating: ```python eval.py --mode img```
+  - To evaluate model using only text features and node+edge gating: ```python eval.py --mode gl```
+  - To modify the number of negative samples (default: 1000): ```python eval.py --neg_sample_size 100 --batch_size 10000```
 
 ### Downstram task 1: NER
 
