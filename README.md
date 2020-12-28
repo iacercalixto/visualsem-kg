@@ -1,6 +1,37 @@
 # visualsem-kg
 Representation learning for VisualSem knowledge graph.
 
+### Knowledge Representation Learning
+1. Requirements
+```
+- Python 3.6+
+- PyTorch 1.1.0+
+- dgl-cu100 0.4.3
+```
+
+2. Data
+- Graph:
+  - Dataframe storing graph nodes, its neighbors, and their relation types: ```join_df.pkl```
+  - Reference dict (node, edge numbering): ```ref_dict.pkl```
+  - Edge ID mapping for data split: ```rel_map.csv```
+- Features:
+  - Image features: ```visualsem_features.h5``` (download [here](https://drive.google.com/file/d/1J6qx4-ho24DxGueXONH9ap0s26oijJSy/view?usp=sharing))
+  - Text features: ```text_features_multi.h5``` (download [here](https://drive.google.com/file/d/1rtvYaVR0RAG218o3wLWpJWeI2ao0s4Mn/view?usp=sharing))
+
+3. GraphSage+DistMult: 
+- Training:
+  - Best model using image+text features and node+edge gating: ```python train.py```  
+  - Model without image or text features: ```python train.py --mode node```
+  - Model using only image features and node+edge gating: ```python train.py --mode img```
+  - Model using only text features and node+edge gating: ```python train.py --mode gl```
+- Evaluation:
+  - Best model using image+text features and node+edge gating: ```python eval.py```  
+  - Model without image or text features: ```python eval.py --mode node```
+  - Model using only image features and node+edge gating: ```python eval.py --mode img```
+  - Model using only text features and node+edge gating: ```python eval.py --mode gl```
+
+### Downstram task 1: NER
+
 ### Downstream task 2: Multisense
 1. Requirements
 ```
