@@ -117,7 +117,7 @@ class Multimodel(nn.Module):
     Model class for Multimodal Verb Sense Disambiguation
     [Textual query => BERT text feature; Image features; Node hidden state] => predict translated verb
     '''
-    def __init__(self, n_classes, n_hidden=None, node_flag=False, nonlinearity=False, drop_prob=0, projection=False):
+    def __init__(self, n_classes, n_hidden=None, node_flag=False, nonlinearity=False, drop_prob=0, projection=False, proj_dim=100):
         super(Multimodel, self).__init__()
         self.bert = BertModel.from_pretrained(PRE_TRAINED_MODEL_NAME)
         self.drop = nn.Dropout(p=drop_prob)
@@ -131,9 +131,9 @@ class Multimodel(nn.Module):
         ## two-layer
         if self.n_hidden is not None:
             if self.projection: #first project both img & text features to 100 dim, then concat w/ node hidden state (100-dim)
-                self.proj_img = nn.Linear(2048, 100)
-                self.proj_txt = nn.Linear(self.bert.config.hidden_size , 100)
-                self.hidden = nn.Linear(200 + node_dim, n_hidden) 
+                self.proj_img = nn.Linear(2048, proj_dim)
+                self.proj_txt = nn.Linear(self.bert.config.hidden_size , proj_dim)
+                self.hidden = nn.Linear(2*proj_dim + node_dim, n_hidden) 
             else: #one giant projection layer on concatenated features
                 self.hidden = nn.Linear(self.bert.config.hidden_size + 2048 + node_dim, n_hidden) 
             self.out = nn.Linear(n_hidden, n_classes) #output layer
@@ -239,8 +239,11 @@ if __name__=="__main__":
     p.add_argument('--nonlinear', action='store_true', default=False)
     p.add_argument('--dropout', type=float, default=0)
     p.add_argument('--projection', action='store_true', default=False)
-    p.add_argument('--model_file', type=str, default="./multisense_model_weights/baseline_lr0.0005_2.bin")
+    p.add_argument('--model_file', type=str, default="./multisense_model_weights/plustest/baseline_lr0.0005_2.bin")
     p.add_argument('--subset', type=float, default=1) #determine whether subset training samples for low-resource regime
+    p.add_argument('--proj_dim', type=int, default=100) #specify the projection dimension (raw feature -> projected feature)
+    p.add_argument('--hidden_dim', type=int, default=128) #specify the projection dimension (concatenated projected features -> hidden layer)
+
     
     args = p.parse_args()
     ##BERT params
@@ -283,9 +286,9 @@ if __name__=="__main__":
 
     ##model
     num_verbs = len(train_dataset.verb_map)
-    #print(num_verbs)
+    print(num_verbs)
     if args.num_layer == 2:
-        model = Multimodel(num_verbs, 128, args.node, args.nonlinear, args.dropout, args.projection)
+        model = Multimodel(num_verbs, args.hidden_dim, args.node, args.nonlinear, args.dropout, args.projection, args.proj_dim)
     else: 
         model = Multimodel(num_verbs, None, args.node, False, 0)
     for param in model.bert.parameters():
@@ -329,11 +332,14 @@ if __name__=="__main__":
           history['val_loss'].append(val_loss)
           if val_acc > best_accuracy:
             if args.node:
-              torch.save(model.state_dict(),'./multisense_model_weights/plustest/'+ args.node_file.split('/')[-1][:-2] +'.bin')
+              model_path = './multisense_model_weights/plustest/'+ args.node_file.split('/')[-1][:-2] +'.bin'
+              torch.save(model.state_dict(), model_path)
             else:
-              torch.save(model.state_dict(),'./multisense_model_weights/plustest/baseline_lr' + str(args.lr) + '_' + str(args.num_layer) + '.bin')
+              model_path = './multisense_model_weights/plustest/baseline_lr' + str(args.lr) + '_' + str(args.num_layer) + '.bin'
+              torch.save(model.state_dict(), model_path)
             best_accuracy = val_acc
     #eval on test
+    model.load_state_dict(torch.load(model_path))
     test_acc, test_loss = eval_model(
             model,
             test_loader,
