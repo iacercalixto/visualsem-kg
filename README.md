@@ -57,10 +57,9 @@ Representation learning for VisualSem knowledge graph.
   - Node hidden state files: (TBA - from Yash's gdrive)
 
 3. Training/Evaluatoin
-- To train our baseline: ```python multi_train.py --epochs 10 --num_layer 2 --projection --lr 5e-4 --dropout 0.1 --nonlinear```
-- To train with node hidden states: ```python multi_train.py --epochs 10 --node --num_layer 2 --projection --lr 5e-4 --dropout 0.1 --nonlinear```
-- To subset training data in the low-resource regime, add argument: ```--subset 0.1```
-- To specify node hidden state files, add argument: ```--node_file "/content/drive/My Drive/graph/nyu_multimodal_kb/NER/graph_emb_img.t"```
+- To train our baseline: ```python multi_train.py --epochs 10 --num_layer 2 --projection --lr 5e-4 --dropout 0.1 --nonlinear --hidden_dim 128```
+- To train with node hidden states: ```python multi_train.py --epochs 10 --node --num_layer 2 --projection --lr 5e-4 --dropout 0.1 --nonlinear --hidden_dim 100```
+- To specify different node hidden state files, add argument: ```--node_file "/content/drive/My Drive/graph/nyu_multimodal_kb/NER/graph_emb_img.t"```
 
 4. Misc
 - Script for creating ResNet152 image features: ```img_feature.py```
