@@ -35,6 +35,12 @@ Representation learning for VisualSem knowledge graph.
 
 ### Downstram task 1: NER
 
+Please access this [Colab Notebook](https://colab.research.google.com/drive/1LkMw8sfsJkS2odk5jBHR7Nl2ZXoXE788?usp=sharing) and follow the instructions in it to run a BERT-based token classification (NER) model on data from the [WNUT-17](https://huggingface.co/datasets/wnut_17) task.
+
+You will also need to download this [.zip file](https://drive.google.com/file/d/104pcNrFsPAhL68-rmbjFT0oiXq82HPYM/view?usp=sharing) and upload it to Colab. The notebook contains instructions about this file.
+
+The example in the notebook above walks through the WNUT-17 task, but you may change the {train/dev/test}.txt data files to a task of your choice. Note that this also requires you to retrieve nodes from the VisualSem KG that correspond to your task data. Retrieved nodes for the WNUT-17 task are provided in the .zip file above.
+
 ### Downstream task 2: Multisense
 1. Requirements
 ```
