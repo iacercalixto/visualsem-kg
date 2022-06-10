@@ -17,7 +17,9 @@ python train.py --data_location '/data/visualsem/' --img_feature_path 'path/to/i
 ```evaluate_interval```: evaluate on validation set every N steps
 
 ```num_rels```: number of distinct relations in the input graph
+
 ```num_graph_nodes```: number of distinct nodes in the input graph
 
 ```batch_size```: training batch size
+
 ```neg_sample_size```: number of permuted triplets to generate against each true triplet
