@@ -39,7 +39,7 @@ Please access this [Colab Notebook](https://colab.research.google.com/drive/1LkM
 
 You will also need to download this [.zip file](https://drive.google.com/file/d/104pcNrFsPAhL68-rmbjFT0oiXq82HPYM/view?usp=sharing) and upload it to Colab. The notebook contains instructions about this file.
 
-The example in the notebook above walks through the WNUT-17 task, but you may change the {train/dev/test}.txt data files to a task of your choice. Note that this also requires you to retrieve nodes from the VisualSem KG that correspond to your task data. Retrieved nodes for the WNUT-17 task are provided in the .zip file above. 
+The example in the notebook above walks through the WNUT-17 task, but you may change the {train/dev/test}.txt data files to a task of your choice. Note that this also requires you to retrieve nodes from the VisualSem KG that correspond to your task data. Code for node retrieval can be found in the [VisualSem git repository](https://github.com/iacercalixto/visualsem) (see: **Retrieval**). Retrieved nodes for the WNUT-17 task are provided in the .zip file above. 
 
 ### Downstream task 2: Multisense
 1. Requirements
